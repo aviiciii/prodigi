@@ -21,7 +21,7 @@ body {
 
 .list-group-item-xxl{
     padding: 20px;
-    padding-left: 40px;
+    padding-left: ;
 }
 
 /* index */
@@ -166,4 +166,67 @@ p{
 }
 .mb-0{
     font-weight: 400;
+}
+
+
+
+
+
+
+/* Mithun - css */
+
+.container{
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px;
+}
+.products{
+   
+    padding: 10px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap:wrap;
+}
+.container h1{
+    font-size: 50px;
+}
+.product{
+    width: 330px;
+    height: 500px;
+    background-color: rgb(225, 237, 247);
+    box-sizing: border-box;
+    padding: 15px;
+    margin: 45px;
+    border-radius: 20px;
+}
+.product img{
+    width: 300px;
+}
+.product h2{
+    font-size: 40px;
+}
+.product p{
+    font-size: 20px;
+}
+.searchbar{
+    width: 550px;
+    border-radius: 15px;
+    height: 46px;
+}
+.searchbar input[type=text]{
+    width: 470px;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border: none;
+    background-color: rgb(206, 206, 206);
+    padding: 10px;
+}
+.searchbar input[type=button]{
+    height: 100%;
+    border: none;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    background-color: black;
+    color: white;
 }
