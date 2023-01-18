@@ -1,0 +1,28 @@
+{% extends "auctions/layout.html" %}
+
+{% load static %}
+
+{% block body %}
+    <div class="spacing">
+        <h2>Categories</h2>
+        <br>
+        <div class="row">
+            <div class="column">
+                <ul class="list-group cat-list">
+                    {% for category in categories|slice:'0:9' %}
+                        <a class="list-group-item list-group-item-action" href="{% url 'category_type' cat=category.0 %}">{{ category.1 }}</a>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="column">
+                <ul class="list-group cat-list">
+                    {% for category in categories|slice:'9:' %}
+                        <a class="list-group-item list-group-item-action" href="{% url 'category_type' cat=category.0 %}">{{ category.1 }}</a>
+                    {% endfor %}
+                </ul>
+            </div>
+          </div>
+        
+    </div>
+
+{% endblock %}

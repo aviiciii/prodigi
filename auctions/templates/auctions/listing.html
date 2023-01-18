@@ -1,0 +1,252 @@
+{% extends "auctions/layout.html" %}
+{% load static %}
+{% load mathfilters %}
+{% block body %}
+<div class="listing_spacing">
+    <!-- title -->
+    <div class="title">
+        <p>{{listing.title}}</p> 
+    </div>
+
+    <!-- Image -->
+    {% if listing.img %}
+        <img src='{{ listing.img }}' alt='{{ listing.img }}' height = '400px'>
+    {% endif %}
+
+    <!-- desc -->
+    <div class="desc">
+        <span class="list_head">Description:</span> 
+        <p>{{listing.desc}}</p>
+    </div>
+        
+    <!-- bids -->
+    <div class="bids">
+        {% if listing.active_status == True %}
+            <!-- if listing is active -->
+            {% if listing.bid.amount %}
+                <p>Current Bid: ${{ listing.bid.amount }}&nbsp;&nbsp;|&nbsp; 
+                
+            {% endif %}
+                Starting Bid: ${{ listing.start_bid }}</p>
+                <!-- no of bids -->
+                
+                <span class="noofbids">{{count}} bids placed so far.</span>
+        {% endif %}
+    </div>
+    
+
+    
+
+    {% if listing.user.id == user.id %}
+        <!-- ///////////////////////// OWNER VIEW \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\  -->
+
+        <div class="bids">
+            <!-- show winning bid and winner -->
+            {% if listing.active_status == False %}
+                <p>Winning bid: ${{ listing.bid.amount }} by {{ listing.bid.user_id.username}}</p> 
+            {% endif %}
+        </div>
+        
+
+        <!-- no of bids -->
+        {% if listing.active_status == False %}
+            <p>{{count}} bids was placed against starting bid of ${{ listing.start_bid }}.</p>
+        {% endif %}
+
+        <!-- details -->
+        
+
+        <div class="details">
+            <p>
+                Listed by: {{listing.user.first_name}} (You)
+            <br>
+                Category: {{listing.category}}
+            </p>
+        </div>
+        
+        
+        <!-- current bids and close listing-->
+        {% if listing.active_status == True %}
+            {% if listing.bid.amount %}
+                <p>The current bid is {{ listing.bid.amount|sub:listing.start_bid}} higher than the starting bid.
+            {% else %}
+                <p>No bids placed.</p>
+            {% endif %}
+
+
+            <form action="{% url 'listing' list_id=listing.id %}" method="post">
+                {% csrf_token %}
+                
+                <button type="submit" name="close" class="btn btn-primary">Close Listing</button>
+            </form>
+
+        {% else %}
+
+            <p>The listing has been closed by you.</p>
+
+        {% endif %}
+        
+        <!-- comments -->
+        
+        
+          
+
+
+        
+
+
+    {% else %}
+    <!-- ///////////////////////// USER VIEW \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\  -->
+
+        
+
+
+        {% if listing.active_status == True %}
+            <div class="bids">
+                <!-- bid details -->
+                {% if listing.bid.user_id.id == user.id %}
+                    <span class="noofbids">Your bid is the current bid.</span>
+                {% elif not listing.bid.amount%}
+                    <span class="noofbids">Place the starting bid.</span>
+                {% else %}
+                    <span class="noofbids">Place bids to become the highest bidder.</span>
+                {% endif %}
+            </div>
+            
+
+            <!-- bidding -->
+            <div class="bidform">
+                {% if user.is_authenticated %}
+                <form class="row g-3 bidform" action="{% url 'listing' list_id=listing.id %}" method="post">
+                    {% csrf_token %}
+                    <div class="col-auto">
+                    
+                        {% if listing.bid.amount %}
+                            <input class="form-control" name="bid_amount" type="number" placeholder="Bid" min="{{listing.bid.amount|add:'1'}}" required>
+                        {% else %}
+                            <input class="form-control" name="bid_amount" type="number" placeholder="Bid" min="{{listing.start_bid}}" required>
+                        {% endif %}
+                    </div>
+                    <div class="col-auto">
+                        <button type="submit" name="bid" class="btn btn-success">Place Bid</button>
+                    </div>
+                    {% if listing.active_status == True %}
+                    <div class="col-auto">
+                        {% if watchlisted == False %}
+                            <button type="submit" name="watchlist" class="btn btn-primary"formnovalidate >Watchlist</button>
+                        {% else %}
+                            <button type="submit" name="watchlist" class="btn btn-primary"formnovalidate >Remove from Watchlist</button>
+                        {% endif %}
+                        
+                    </div>
+                    {% endif %}
+                </form>
+                {% endif %}
+            </div>
+            
+
+            
+
+        {% else %}
+        
+            <h2>The listing is closed by the owner.</h2>
+    
+            {% if user.id == listing.bid.user_id.id %}
+                <p>You have won this bidding with bid of ${{ listing.bid.amount }}</p>
+            {% else %}
+                <p>Winning bid: ${{ listing.bid.amount }}</p>
+            {% endif %}
+        {% endif %}
+        
+
+
+
+
+        <!-- details -->
+
+        
+
+        <div class="details">
+            <p>
+                Listed by: {{listing.user.first_name}}
+                <br>
+                Category: {{listing.category}}
+            </p>
+        </div>
+        
+
+    
+
+
+    
+
+    {% endif %}
+
+    <!-- comments -->
+        
+    <div class="container my-5 py-5">
+        <div class="row d-flex justify-content-left">
+            <div class="col-md-12 col-lg-10">
+                <div class="card text-dark">
+                    <div class="card-body p-4">
+                        <h4 class="mb-0">Comments</h4>
+                    </div>
+                    {% for comment in comments %}
+                        <hr class="my-0" />
+                
+                        <div class="card-body p-4">
+                            <div class="d-flex flex-start">
+                                <div>
+                                    <h6 class="fw-bold mb-1">{{comment.user_id.username}}</h6>
+                                    <div class="d-flex align-items-center mb-3">
+                                    </div>
+                                    <p class="mb-0">
+                                    {{comment.comment}}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    {% empty %}
+                        <hr class="my-0" />
+                        <div class="card-body p-4">
+                            <div class="d-flex flex-start">
+                                <div>
+                                    <h6 class="fw-bold mb-1">No comments.</h6>
+                                    <div class="d-flex align-items-center mb-3">
+                                    </div>
+                                    <p class="mb-0">
+                                    Add your comment below
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                    {% endfor %}
+                    <!-- add comment form-->
+                    <div class="card-footer py-3 border-0" style="background-color: #f8f9fa;">
+
+                        <form action="{% url 'listing' list_id=listing.id %}" method="post">
+                            {% csrf_token %}
+
+                            <div class="d-flex flex-start w-100">   
+                                <div class="form-outline w-100">
+                                    <textarea class="form-control" id="textAreaExample" rows="4" style="background: #fff;" name="usercomment"></textarea>
+                                    <label class="form-label" for="textAreaExample">Message</label>
+                                </div>
+                            </div>
+                            <div class="float-end mt-2 pt-1">
+                                <button type= "submit" name= "comment" class="btn btn-primary btn-sm">Post comment</button>
+                            </div>
+                        </form>
+                    </div>
+                <hr class="my-0" />
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+
+{% endblock %}

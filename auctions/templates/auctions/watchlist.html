@@ -1,0 +1,54 @@
+{% extends "auctions/layout.html" %}
+
+{% load static %}
+
+{% block body %}
+<div class="spacing">
+    <h2>Watchlist</h2>
+    {% for listing in listings %}
+            <a class="list-group-item list-group-item-action" href='{% url 'listing' list_id=listing.list_id.id %}'>
+                <ul class="list-group list-group-horizontal">
+                    {% comment %} Image {% endcomment %}
+
+                    <div class="image_spacing">
+                        {% if listing.list_id.img %}
+                            <img src='{{ listing.list_id.img }}' alt='{{ listing.list_id.img }}' height = '200px' class="image">
+                        {% else %}
+                            <img src='{% static 'auctions/blank.png' %}' alt='no image' height = '200px' class = "image">
+                        {% endif %}
+                    </div>
+
+                    <li class="list-group-item-xxl" >
+                        <h1>
+                            {{ listing.list_id.title }}
+                        </h1>
+                        <br>
+                        <h3>
+                            Description: {{ listing.list_id.desc }}
+                        </h3>
+                        
+                        <br>
+                        <h5>Category: {{ listing.list_id.category }}</h5>
+                        <br>
+                        
+                        {% if listing.list_id.bid.amount %}
+                            {% if listing.list_id.active_status == True %}
+                                <h5>Current Bid: ${{ listing.list_id.bid.amount}}</h5>
+                            {% else %}
+                                <h5>Winning Bid: ${{ listing.list_id.bid.amount}}</h5>
+                            {% endif %}
+                        {% endif %}
+                        <h5>Starting Bid: ${{listing.list_id.start_bid}}</h5>
+                        
+                        <br>
+                        {% if listing.list_id.active_status == True %}
+                            <h5>Status: Listing is open.</h5>
+                        {% else %}
+                            <h5>Status: Listing is closed.</h5>
+                        {% endif %}
+                    </li>
+                </ul>
+            </a>
+    {% endfor %}
+</div>
+{% endblock %}

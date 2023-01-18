@@ -1,0 +1,41 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>{% block title %}Auctions{% endblock %}</title>
+        <!-- get bootstrap -->
+        {% comment %} <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"> {% endcomment %}
+        <!-- MDB -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/5.0.0/mdb.min.css" rel="stylesheet"/>
+        <link href="{% static 'auctions/styles.css' %}" rel="stylesheet">
+        <link rel="icon" href = "{% static 'auctions/favicon.png' %}">
+        <!-- google fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:ital,wght@0,100;0,300;0,400;0,500;1,200&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        
+        <!-- navbar -->
+        {% include 'auctions/navbar.html' %}
+        
+        <!-- messages -->
+        
+        {% for message in messages %}
+        {% if message.tags == 'error' %}
+            <div class="alert alert-danger" role="alert" >
+                {{ message }}
+            </div>
+        {% else %}
+          <div class="alert alert-success" role="alert" >
+            {{ message }}
+          </div>
+        {% endif %}
+        {% endfor %}
+            
+
+        {% block body %}
+        {% endblock %}
+    </body>
+</html>

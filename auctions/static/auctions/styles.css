@@ -1,0 +1,169 @@
+body {
+    padding: 10px;
+}
+
+.form-control{
+    padding: 10px;
+    font-size: large;
+    width: 60%;
+}
+
+.newlisting{
+    padding: 30px 50px;
+
+}
+
+.messages{
+    font-size: large;
+    padding: 10px;
+    padding-left: 0vh;
+}
+
+.list-group-item-xxl{
+    padding: 20px;
+    padding-left: 40px;
+}
+
+/* index */
+.spacing{
+    padding:0 10%;
+    padding-top: 1%;
+}
+
+.image_spacing{
+    padding: 20px;
+    width:30%;
+    height:30%;
+    
+}
+.image{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 10px;
+    
+}
+ul {
+    list-style-type: none;
+}
+h1{
+    font-family: 'Barlow Semi Condensed', sans-serif;
+    font-size: 4rem;
+    font-weight: 400;
+}
+h2{
+    font-family: 'Barlow Semi Condensed', sans-serif;
+    font-weight: 500;
+    font-size: 3rem;
+}
+h3{
+    font-family: 'Barlow Semi Condensed', sans-serif;
+    font-weight: 200;
+}
+p{
+    font-family: 'Barlow Semi Condensed', sans-serif;
+    font-weight: 200;
+    font-size: larger;
+    line-height: 150%;
+}
+
+/* navbar */
+.navbrand{
+    padding-right: 3%;
+}
+
+
+/* categories */
+
+.cat-list{
+    width:80%;
+    font-size: larger;
+}
+.row {
+    display: flex;
+}
+  
+.column {
+    flex: 50%;
+}
+.cat_image{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 5px;
+}
+
+/* add listing */
+.form_spacing{
+    padding-left: 50px;
+}
+.newlisting{
+    padding-top: 5px;
+}
+
+/* messages */
+.alert{
+    text-align: center;
+}
+
+/* listing */
+.listing_spacing{
+    padding:0 12%;
+    padding-top: 1%;
+}
+.title{
+    font-size: 4rem;
+}
+
+.list_head{
+    font-size: 2.4rem;
+}
+
+.desc{
+    font-family: 'Barlow Semi Condensed', sans-serif;
+    font-weight: 500;
+    
+    padding-top: 2%;
+    font-size:1.8rem;
+}
+.desc p{
+    font-weight: 400;
+}
+.bids{
+    font-size: 1.4rem;
+}
+.bids p{
+    font-weight: 400;
+    margin-bottom: 0.4rem;
+}
+.noofbids{
+    font-family: 'Barlow Semi Condensed', sans-serif;
+    font-size: 1.6rem;
+    line-height: 100%;
+    margin-bottom: 0rem;
+    font-weight: 300;
+}
+
+.bidform{
+    padding: 20px 0;
+}
+
+.bidform .form-control{
+    width:100%;
+    padding-left: 10%;
+    height:100%;
+}
+.bidform .btn{
+    height: 100%;
+}
+.details p{
+    font-size: 1.4rem;
+    font-weight: 300;
+}
+
+.container{
+    padding-left: 0;
+}
+.mb-0{
+    font-weight: 400;
+}
