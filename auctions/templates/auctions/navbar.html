@@ -32,9 +32,11 @@
             </li>
         </ul>
 
+        {% if user.is_authenticated %}
         <div class="searchbar">
             <input type="text" name="searchbar" placeholder="Search for products" id="searchbar"><input type="button" value="Search">
         </div>
+        {% endif %}
         
         <!-- Right links -->
         <div class="d-flex align-items-center">

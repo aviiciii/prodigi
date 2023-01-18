@@ -21,17 +21,7 @@
         
     <!-- bids -->
     <div class="bids">
-        {% if listing.active_status == True %}
-            <!-- if listing is active -->
-            {% if listing.bid.amount %}
-                <p>Current Bid: ${{ listing.bid.amount }}&nbsp;&nbsp;|&nbsp; 
-                
-            {% endif %}
-                Starting Bid: ${{ listing.start_bid }}</p>
-                <!-- no of bids -->
-                
-                <span class="noofbids">{{count}} bids placed so far.</span>
-        {% endif %}
+        Price: ${{ listing.start_bid}}
     </div>
     
 
@@ -48,11 +38,6 @@
         </div>
         
 
-        <!-- no of bids -->
-        {% if listing.active_status == False %}
-            <p>{{count}} bids was placed against starting bid of ${{ listing.start_bid }}.</p>
-        {% endif %}
-
         <!-- details -->
         
 
@@ -63,29 +48,7 @@
                 Category: {{listing.category}}
             </p>
         </div>
-        
-        
-        <!-- current bids and close listing-->
-        {% if listing.active_status == True %}
-            {% if listing.bid.amount %}
-                <p>The current bid is {{ listing.bid.amount|sub:listing.start_bid}} higher than the starting bid.
-            {% else %}
-                <p>No bids placed.</p>
-            {% endif %}
-
-
-            <form action="{% url 'listing' list_id=listing.id %}" method="post">
-                {% csrf_token %}
-                
-                <button type="submit" name="close" class="btn btn-primary">Close Listing</button>
-            </form>
-
-        {% else %}
-
-            <p>The listing has been closed by you.</p>
-
-        {% endif %}
-        
+    
         <!-- comments -->
         
         
@@ -97,69 +60,6 @@
 
     {% else %}
     <!-- ///////////////////////// USER VIEW \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\  -->
-
-        
-
-
-        {% if listing.active_status == True %}
-            <div class="bids">
-                <!-- bid details -->
-                {% if listing.bid.user_id.id == user.id %}
-                    <span class="noofbids">Your bid is the current bid.</span>
-                {% elif not listing.bid.amount%}
-                    <span class="noofbids">Place the starting bid.</span>
-                {% else %}
-                    <span class="noofbids">Place bids to become the highest bidder.</span>
-                {% endif %}
-            </div>
-            
-
-            <!-- bidding -->
-            <div class="bidform">
-                {% if user.is_authenticated %}
-                <form class="row g-3 bidform" action="{% url 'listing' list_id=listing.id %}" method="post">
-                    {% csrf_token %}
-                    <div class="col-auto">
-                    
-                        {% if listing.bid.amount %}
-                            <input class="form-control" name="bid_amount" type="number" placeholder="Bid" min="{{listing.bid.amount|add:'1'}}" required>
-                        {% else %}
-                            <input class="form-control" name="bid_amount" type="number" placeholder="Bid" min="{{listing.start_bid}}" required>
-                        {% endif %}
-                    </div>
-                    <div class="col-auto">
-                        <button type="submit" name="bid" class="btn btn-success">Place Bid</button>
-                    </div>
-                    {% if listing.active_status == True %}
-                    <div class="col-auto">
-                        {% if watchlisted == False %}
-                            <button type="submit" name="watchlist" class="btn btn-primary"formnovalidate >Watchlist</button>
-                        {% else %}
-                            <button type="submit" name="watchlist" class="btn btn-primary"formnovalidate >Remove from Watchlist</button>
-                        {% endif %}
-                        
-                    </div>
-                    {% endif %}
-                </form>
-                {% endif %}
-            </div>
-            
-
-            
-
-        {% else %}
-        
-            <h2>The listing is closed by the owner.</h2>
-    
-            {% if user.id == listing.bid.user_id.id %}
-                <p>You have won this bidding with bid of ${{ listing.bid.amount }}</p>
-            {% else %}
-                <p>Winning bid: ${{ listing.bid.amount }}</p>
-            {% endif %}
-        {% endif %}
-        
-
-
 
 
         <!-- details -->
@@ -173,14 +73,7 @@
                 Category: {{listing.category}}
             </p>
         </div>
-        
 
-    
-
-
-    
-
-    {% endif %}
 
     <!-- comments -->
         
@@ -248,5 +141,7 @@
 
 
 </div>
+
+{% endif %}
 
 {% endblock %}
