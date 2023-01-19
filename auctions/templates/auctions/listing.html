@@ -13,6 +13,35 @@
     {% endif %}
     </div>
 
+
+    <!-- details -->
+        
+
+    <div class="details">
+        <div class="desc">
+            <span class="list_head">Description:</span> 
+            <p>{{listing.desc}}</p>
+        </div>
+            
+        <!-- bids -->
+        <div class="bids">
+            Price: ${{ listing.start_bid}}
+        </div>
+        <p>
+            Listed by: {{listing.user.first_name}} (You)
+        <br>
+            Category: {{listing.category}}
+        </p>
+
+        <form class="row g-3 bidform" action="{% url 'listing' list_id=listing.id %}" method="post">
+            {% csrf_token %}
+            {% if watchlisted == False %}
+                <button type="submit" name="watchlist" class="btn btn-primary"formnovalidate >Add to Cart</button>
+            {% else %}
+                <button type="submit" name="watchlist" class="btn btn-primary"formnovalidate >Remove from Cart</button>
+            {% endif %}
+        </form>
+    </div>
     
 
     
@@ -28,29 +57,7 @@
         </div>
         
 
-        <!-- details -->
         
-
-        <div class="details">
-            <div class="desc">
-                <span class="list_head">Description:</span> 
-                <p>{{listing.desc}}</p>
-            </div>
-                
-            <!-- bids -->
-            <div class="bids">
-                Price: ${{ listing.start_bid}}
-            </div>
-            <p>
-                Listed by: {{listing.user.first_name}} (You)
-            <br>
-                Category: {{listing.category}}
-            </p>
-
-            <div class="btn btn-primary">Buy Now</div>
-            <div class="btn btn-primary">Add to Cart</div>
-
-        </div>
         
             </div>
             
@@ -74,13 +81,6 @@
 
         
 
-        <div class="details">
-            <p>
-                Listed by: {{listing.user.first_name}}
-                <br>
-                Category: {{listing.category}}
-            </p>
-        </div>
 
 
         
@@ -89,67 +89,7 @@
 
     <!-- comments -->
         
-    <div class="container my-5 py-5">
-        <div class="row d-flex justify-content-left">
-            <div class="col-md-12 col-lg-10">
-                <div class="card text-dark">
-                    <div class="card-body p-4">
-                        <h4 class="mb-0">Comments</h4>
-                    </div>
-                    {% for comment in comments %}
-                        <hr class="my-0" />
-                
-                        <div class="card-body p-4">
-                            <div class="d-flex flex-start">
-                                <div>
-                                    <h6 class="fw-bold mb-1">{{comment.user_id.username}}</h6>
-                                    <div class="d-flex align-items-center mb-3">
-                                    </div>
-                                    <p class="mb-0">
-                                    {{comment.comment}}
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        
-                    {% empty %}
-                        <hr class="my-0" />
-                        <div class="card-body p-4">
-                            <div class="d-flex flex-start">
-                                <div>
-                                    <h6 class="fw-bold mb-1">No comments.</h6>
-                                    <div class="d-flex align-items-center mb-3">
-                                    </div>
-                                    <p class="mb-0">
-                                    Add your comment below
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-
-                    {% endfor %}
-                    <!-- add comment form-->
-                    <div class="card-footer py-3 border-0" style="background-color: #f8f9fa;">
-
-                        <form action="{% url 'listing' list_id=listing.id %}" method="post">
-                            {% csrf_token %}
-
-                            <div class="d-flex flex-start w-100">   
-                                <div class="form-outline w-100">
-                                    <textarea class="form-control" id="textAreaExample" rows="4" style="background: #fff;" name="usercomment"></textarea>
-                                    <label class="form-label" for="textAreaExample">Message</label>
-                                </div>
-                            </div>
-                            <div class="float-end mt-2 pt-1">
-                                <button type= "submit" name= "comment" class="btn btn-primary btn-sm">Post comment</button>
-                            </div>
-                        </form>
-                    </div>
-                <hr class="my-0" />
-            </div>
-        </div>
-    </div>
-
+   
 
 
 </div>

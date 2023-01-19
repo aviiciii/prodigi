@@ -145,7 +145,7 @@ def listing(request, list_id):
                     if int(watchlisting.list_id.id) == int(list_id):
                         # if in watchlist remove from watchlist
                         watchlisting.delete()
-                        messages.success(request, 'Listing remove from watchlist.')
+                        messages.success(request, 'Remove from cart.')
                         return redirect('listing', list_id=list_id)
 
                 
@@ -155,7 +155,7 @@ def listing(request, list_id):
                     list_id=listing,
                 )
                 watchlisting.save()
-                messages.success(request, 'Listing watchlisted.')
+                messages.success(request, 'Added to cart.')
                 return redirect('listing', list_id=list_id)
 
             elif 'bid' in request.POST:
@@ -315,3 +315,4 @@ def category_type(request,cat):
         'category': category
     }
     return render(request, "auctions/category_listing.html", context)
+
