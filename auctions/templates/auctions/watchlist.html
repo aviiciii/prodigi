@@ -4,7 +4,7 @@
 
 {% block body %}
 <div class="spacing">
-    <h2>Watchlist</h2>
+    <h2>Cart</h2>
     {% for listing in listings %}
             <a class="list-group-item list-group-item-action" href='{% url 'listing' list_id=listing.list_id.id %}'>
                 <ul class="list-group list-group-horizontal">

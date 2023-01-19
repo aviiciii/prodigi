@@ -30,6 +30,9 @@
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'category' %}">Categories</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'watchlist' %}">Cart</a>
+          </li>
         </ul>
 
         {% if user.is_authenticated %}
