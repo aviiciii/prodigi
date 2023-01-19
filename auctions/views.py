@@ -7,7 +7,7 @@ from django.urls import reverse
 
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from .models import User, Listing, Bid, Comment, Watchlist
+from .models import User, Listing, Bid, Comment, Watchlist, Order
 from .forms import NewItem
 from commerce.settings import LOGIN_REDIRECT_URL
 from django.db.models import Max
@@ -283,6 +283,26 @@ def watchlist(request):
         highest_amount = highest_amount_dict['amount__max']
         if highest_amount:
             listing.list_id.bid = listing.list_id.bids.get(amount=highest_amount)
+
+    if request.method('POST'):
+        if 'checkout' in request.POST:
+            username = request.user.get_username()
+            user = User.objects.get(username=username) 
+            listings=user.watchlist.all()
+            
+            Order.objects.create(
+                user_id=user,
+                list_id=listings,
+                amount= sum(listing.list_id.start_bid for listing in listings),
+                status= 'Pending'
+            )
+
+            
+
+            watchlist.delete()
+            messages.success(request, 'Bought successfully.')
+            return redirect('index')
+
 
     context= {
         'listings': listings
