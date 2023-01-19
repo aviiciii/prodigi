@@ -16,6 +16,10 @@ from django.db.models import Max
 
 def index(request):
     
+    if request.method == "POST":
+        return redirect('index')
+
+
     # list the active listing in index
     listings = Listing.objects.filter(active_status=True)
 
@@ -284,24 +288,24 @@ def watchlist(request):
         if highest_amount:
             listing.list_id.bid = listing.list_id.bids.get(amount=highest_amount)
 
-    if request.method('POST'):
-        if 'checkout' in request.POST:
-            username = request.user.get_username()
-            user = User.objects.get(username=username) 
-            listings=user.watchlist.all()
-            
-            Order.objects.create(
-                user_id=user,
-                list_id=listings,
-                amount= sum(listing.list_id.start_bid for listing in listings),
-                status= 'Pending'
-            )
+    if request.method=='POST':
+    
+        username = request.user.get_username()
+        user = User.objects.get(username=username) 
+        listings=user.watchlist.all()
+        
+        Order.objects.create(
+            user_id=user,
+            list_id=listings,
+            amount= sum(listing.list_id.start_bid for listing in listings),
+            status= 'Pending'
+        )
 
-            
+        
 
-            watchlist.delete()
-            messages.success(request, 'Bought successfully.')
-            return redirect('index')
+        watchlist.delete()
+        messages.success(request, 'Bought successfully.')
+        return redirect('index')
 
 
     context= {

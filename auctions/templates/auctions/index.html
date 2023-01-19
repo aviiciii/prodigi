@@ -3,11 +3,20 @@
 {% load static %}
 
 {% block body %}
+
+
+
+
 <div class="container">
 
     <h1>Products</h1>
 
-    
+    <form action="{% url 'index' %}">
+        {% csrf_token %}
+        <label for="favcolor">Select your preferred color:</label> &nbsp
+        <input type="color" id="favcolor" name="favcolor" value="#ff0000"><br><br>
+        <input type="submit" value="Select">
+      </form>
 
         
 
