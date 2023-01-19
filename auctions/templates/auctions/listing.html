@@ -4,25 +4,15 @@
 {% block body %}
 <div class="listing_spacing">
     <!-- title -->
+
+    <div class="total">
     <div class="title">
         <p>{{listing.title}}</p> 
-    </div>
-
-    <!-- Image -->
-    {% if listing.img %}
+        {% if listing.img %}
         <img src='{{ listing.img }}' alt='{{ listing.img }}' height = '400px'>
     {% endif %}
+    </div>
 
-    <!-- desc -->
-    <div class="desc">
-        <span class="list_head">Description:</span> 
-        <p>{{listing.desc}}</p>
-    </div>
-        
-    <!-- bids -->
-    <div class="bids">
-        Price: ${{ listing.start_bid}}
-    </div>
     
 
     
@@ -42,12 +32,30 @@
         
 
         <div class="details">
+            <div class="desc">
+                <span class="list_head">Description:</span> 
+                <p>{{listing.desc}}</p>
+            </div>
+                
+            <!-- bids -->
+            <div class="bids">
+                Price: ${{ listing.start_bid}}
+            </div>
             <p>
                 Listed by: {{listing.user.first_name}} (You)
             <br>
                 Category: {{listing.category}}
             </p>
+
+            <div class="btn btn-primary">Buy Now</div>
+            <div class="btn btn-primary">Add to Cart</div>
+
         </div>
+        
+            </div>
+            
+
+        
     
         <!-- comments -->
         
@@ -73,6 +81,10 @@
                 Category: {{listing.category}}
             </p>
         </div>
+
+
+        
+
 
 
     <!-- comments -->
@@ -141,7 +153,11 @@
 
 
 </div>
+</div>
 
 {% endif %}
+
+
+
 
 {% endblock %}
