@@ -230,3 +230,13 @@ p{
     background-color: black;
     color: white;
 }
+.details{
+    float: right;
+    margin: 50px;
+    margin-top: 110px;
+}
+.total{
+    float: left;
+    width: 100%;
+    display: flex;
+}
