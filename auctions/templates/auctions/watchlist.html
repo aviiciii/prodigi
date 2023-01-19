@@ -33,15 +33,12 @@
                         
                         <h5>Price: ${{ listing.list_id.starting_bid }}</h5>
                         
-                        <br>
-                        {% if listing.list_id.active_status == True %}
-                            <h5>Status: Listing is open.</h5>
-                        {% else %}
-                            <h5>Status: Listing is closed.</h5>
-                        {% endif %}
                     </li>
                 </ul>
             </a>
     {% endfor %}
+    <div class="checkout">
+        <div class="btn btn-primary">Checkout</div>
+    </div>
 </div>
 {% endblock %}

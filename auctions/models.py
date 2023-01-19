@@ -73,7 +73,7 @@ class Watchlist(models.Model):
 
 class Order(models.Model):
     id = models.AutoField(primary_key=True)
-    list_id = models.manytomanyField(Listing, related_name="orders")
+    list_id = models.ManyToManyField(Listing, related_name="orders")
     user_id = models.ForeignKey(User, on_delete=models.CASCADE, related_name="orders")
     amount = models.CharField(max_length=50)
     status = models.BooleanField(default=False)
