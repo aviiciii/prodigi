@@ -3,44 +3,41 @@
 {% load static %}
 
 {% block body %}
-<div class="spacing">
-    <h2>Active Listings</h2>
-    <br>
+<div class="container">
 
-    {% for listing in listings %}
+    <h1>Products</h1>
+
     
-            <a class="list-group-item list-group-item-action" href="{% url 'listing' list_id=listing.id %}"">
-                <ul class="list-group list-group-horizontal">
-                    {% comment %} Image {% endcomment %}
-                    <div class="image_spacing">
-                        {% if listing.img %}
-                                <img src='{{ listing.img }}' alt='{{ listing.img }}' height = '200px' class = "image">
-                        {% else %}
-                            <img src="{% static 'auctions/blank.png' %}" alt='no image' height = '200px' class = "image">
-                        {% endif %}
+
+        
+
+            
+
+            <div class="products">
+
+                {% for listing in listings %}
+
+                <a href="{% url 'listing' list_id=listing.id %}">
+
+                <div class="product">
+
+                    <img src="{{ listing.img }}" alt=""/>
+
+                    <div class="product_details">
+                        <h2>{{ listing.title }}</h2>
+                        <p>Category: {{ listing.category }}</p>
+                        <p>Price: ${{ listing.start_bid}}</p>
                     </div>
-                    
 
-                    <li class="list-group-item-xxl" >
-                        <h1>
-                            {{ listing.title }}
-                        </h1>
-                        <p>
-                            Description: {{ listing.desc }}<br>
-                            Category: {{ listing.category }}<br>
-                        {% if listing.bid.amount %}
-                            Current Bid: ${{ listing.bid.amount}}<br>
-                        {% endif %}
-                            Starting Bid: ${{listing.start_bid}}<br>
-                        
-                        </p>
+                </div>
 
-                    </li>
-                </ul>
-            </a>
-        
-        
+                </a>
+                
+                {% endfor %}
+
+            </div>
+
     
-    {% endfor %}
+
 </div>
 {% endblock %}

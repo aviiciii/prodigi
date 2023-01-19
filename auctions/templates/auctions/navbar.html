@@ -4,7 +4,7 @@
     <div class="container">
       <div class="navbrand">
         <!-- Navbar brand -->
-        <h3>Autions</h3>
+        <h3>Marketplace</h3>
       </div>
       
       <!-- Toggle button -->
@@ -25,20 +25,21 @@
         <!-- Left links -->
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-                <a class="nav-link" href="{% url 'index' %}">Active Listings</a>
+                <a class="nav-link" href="{% url 'index' %}">Products</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'category' %}">Categories</a>
             </li>
-            {% if user.is_authenticated %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'watchlist' %}">Watchlist</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'newlisting' %}">List Your Item</a>
-                </li>
-            {% endif %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'watchlist' %}">Cart</a>
+          </li>
         </ul>
+
+        {% if user.is_authenticated %}
+        <div class="searchbar">
+            <input type="text" name="searchbar" placeholder="Search for products" id="searchbar"><input type="button" value="Search">
+        </div>
+        {% endif %}
         
         <!-- Right links -->
         <div class="d-flex align-items-center">

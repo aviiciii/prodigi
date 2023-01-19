@@ -4,7 +4,7 @@
 
 {% block body %}
 <div class="spacing">
-    <h2>Watchlist</h2>
+    <h2>Cart</h2>
     {% for listing in listings %}
             <a class="list-group-item list-group-item-action" href='{% url 'listing' list_id=listing.list_id.id %}'>
                 <ul class="list-group list-group-horizontal">
@@ -31,24 +31,14 @@
                         <h5>Category: {{ listing.list_id.category }}</h5>
                         <br>
                         
-                        {% if listing.list_id.bid.amount %}
-                            {% if listing.list_id.active_status == True %}
-                                <h5>Current Bid: ${{ listing.list_id.bid.amount}}</h5>
-                            {% else %}
-                                <h5>Winning Bid: ${{ listing.list_id.bid.amount}}</h5>
-                            {% endif %}
-                        {% endif %}
-                        <h5>Starting Bid: ${{listing.list_id.start_bid}}</h5>
+                        <h5>Price: ${{ listing.list_id.start_bid }}</h5>
                         
-                        <br>
-                        {% if listing.list_id.active_status == True %}
-                            <h5>Status: Listing is open.</h5>
-                        {% else %}
-                            <h5>Status: Listing is closed.</h5>
-                        {% endif %}
                     </li>
                 </ul>
             </a>
     {% endfor %}
+    <div class="checkout">
+        <div class="btn btn-primary">Checkout</div>
+    </div>
 </div>
 {% endblock %}

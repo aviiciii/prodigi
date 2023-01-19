@@ -2,9 +2,6 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 
 
-
-
-
 class User(AbstractUser):
     pass
 
@@ -64,7 +61,7 @@ class Comment(models.Model):
     def __str__(self):
         return f'{self.comment}'
 
-        
+
 class Watchlist(models.Model):
     id = models.AutoField(primary_key=True)
     list_id = models.ForeignKey(Listing, on_delete=models.CASCADE, related_name="watchlisted")
@@ -72,4 +69,20 @@ class Watchlist(models.Model):
     
     def __str__(self):
         return f'{self.user_id}: {self.list_id}'
+
+
+class Order(models.Model):
+    id = models.AutoField(primary_key=True)
+    list_id = models.ManyToManyField(Listing, related_name="orders")
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE, related_name="orders")
+    amount = models.CharField(max_length=50)
+    status = models.BooleanField(default=False)
+    
+    def __str__(self):
+        return f'{self.user_id}: {self.list_id}'
+
+
+
+
+
 

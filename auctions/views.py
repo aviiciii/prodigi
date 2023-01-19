@@ -7,7 +7,7 @@ from django.urls import reverse
 
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from .models import User, Listing, Bid, Comment, Watchlist
+from .models import User, Listing, Bid, Comment, Watchlist, Order
 from .forms import NewItem
 from commerce.settings import LOGIN_REDIRECT_URL
 from django.db.models import Max
@@ -145,7 +145,7 @@ def listing(request, list_id):
                     if int(watchlisting.list_id.id) == int(list_id):
                         # if in watchlist remove from watchlist
                         watchlisting.delete()
-                        messages.success(request, 'Listing remove from watchlist.')
+                        messages.success(request, 'Remove from cart.')
                         return redirect('listing', list_id=list_id)
 
                 
@@ -155,7 +155,7 @@ def listing(request, list_id):
                     list_id=listing,
                 )
                 watchlisting.save()
-                messages.success(request, 'Listing watchlisted.')
+                messages.success(request, 'Added to cart.')
                 return redirect('listing', list_id=list_id)
 
             elif 'bid' in request.POST:
@@ -284,6 +284,26 @@ def watchlist(request):
         if highest_amount:
             listing.list_id.bid = listing.list_id.bids.get(amount=highest_amount)
 
+    if request.method('POST'):
+        if 'checkout' in request.POST:
+            username = request.user.get_username()
+            user = User.objects.get(username=username) 
+            listings=user.watchlist.all()
+            
+            Order.objects.create(
+                user_id=user,
+                list_id=listings,
+                amount= sum(listing.list_id.start_bid for listing in listings),
+                status= 'Pending'
+            )
+
+            
+
+            watchlist.delete()
+            messages.success(request, 'Bought successfully.')
+            return redirect('index')
+
+
     context= {
         'listings': listings
     }
@@ -315,3 +335,4 @@ def category_type(request,cat):
         'category': category
     }
     return render(request, "auctions/category_listing.html", context)
+
