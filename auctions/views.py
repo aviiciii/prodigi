@@ -358,3 +358,4 @@ def color(request, color):
 
     return render(request, "auctions/color.html", context)
 
+
