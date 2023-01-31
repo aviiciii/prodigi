@@ -367,4 +367,7 @@ def orders(request):
     context={
         'orders':orders
     }
+
+    print(orders)
+
     return render(request, "auctions/orders.html", context)

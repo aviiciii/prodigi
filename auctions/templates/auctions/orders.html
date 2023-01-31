@@ -9,18 +9,34 @@
     <h1>Your Orders</h1>
 
     <div class="order_wrapper">
-        {% for order in orders %}
 
         <div class="order">
 
-            <div>{{ Order.list_id.title }}</div>
+            <div class="individual">Name</div>
 
-            <div>{{ Order.list_id.start_bid }}</div>
+            <div class="individual">Amount</div>
 
-            <div>{{ Order.list_id.status }}</div>
+            <div class="individual">Status</div>
 
         </div>
 
+        {% for order in orders %}
+
+        
+
+
+            {% for listing in order.list_id.all %}
+            <div class="order">
+                <div class="individual">{{ listing.title }}</div>
+                <div class="individual">{{ listing.start_bid }}</div>
+                <div class="individual">{{ order.status }}</div>
+             </div>
+
+            {% endfor %}
+
+            
+
+            
         {% endfor %}
     </div>
 </div>
