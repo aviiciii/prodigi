@@ -11,14 +11,12 @@
 
     <h1>Products</h1>
 
-    <form action="{% url 'index' %}">
-        {% csrf_token %}
+        
         <label for="favcolor">Select your preferred color:</label> &nbsp
         <a href="{% url 'color' 1 %}"><button id="btn1" style="border:none; width:50px; height:30px; background-color: #C68642;">&nbsp</button></a>&nbsp 
         <a href ="{% url 'color' 2 %}"><button id="btn2" style="border:none; width:50px; height:30px; background-color: #E0AC69;">&nbsp </button></a>&nbsp 
         <a href="{% url 'color' 3 %}"><button id="btn3" style="border:none; width:50px; height:30px; background-color: #F1C27D;">&nbsp</button></a>&nbsp 
         <a href="{% url 'color' 4 %}"><button id="btn4" style="border:none; width:50px; height:30px; background-color: #FFDBAC;">&nbsp</button></a>
-    </form>
 
         
 
