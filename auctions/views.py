@@ -289,21 +289,28 @@ def watchlist(request):
             listing.list_id.bid = listing.list_id.bids.get(amount=highest_amount)
 
     if request.method=='POST':
-    
+        print('going into post')
         username = request.user.get_username()
         user = User.objects.get(username=username) 
         listings=user.watchlist.all()
         
-        Order.objects.create(
-            user_id=user,
-            list_id=listings,
-            amount= sum(listing.list_id.start_bid for listing in listings),
-            status= 'Pending'
-        )
+        print(listings)
 
+        # neworder= Order.objects.create(
+        #     user_id=user,
+        #     amount= sum(listing.list_id.start_bid for listing in listings),
+        #     status= 'Pending'
+        # )
+        # for listing in listings:
+        #     neworder.list_id.add(listing)
+
+        print('order created')
         
-
-        watchlist.delete()
+        # clear user watchlist
+        for listing in listings:
+            listing.delete()
+        print('watchlist cleared')
+        
         messages.success(request, 'Bought successfully.')
         return redirect('index')
 
@@ -339,4 +346,16 @@ def category_type(request,cat):
         'category': category
     }
     return render(request, "auctions/category_listing.html", context)
+
+
+def color(request, color):
+    listings = Listing.objects.filter(color=color, active_status= True).all()
+    
+    context={
+        'listings':listings,
+        'color': color
+    }
+
+    return render(request, "auctions/color.html", context)
+
 
