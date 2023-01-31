@@ -347,3 +347,7 @@ def category_type(request,cat):
     }
     return render(request, "auctions/category_listing.html", context)
 
+
+def orders(request):
+    return render(request, "auctions/orders.html")
+
