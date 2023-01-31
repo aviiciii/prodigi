@@ -37,8 +37,12 @@
                 </ul>
             </a>
     {% endfor %}
-    <div class="checkout">
-        <div class="btn btn-primary">Checkout</div>
-    </div>
+    <form action="{% url 'index' %}">
+        {% csrf_token %}
+        <div class="checkout">
+            <input type="submit" class="btn btn-primary"></input>
+        </div>
+    </form>
+    
 </div>
 {% endblock %}
