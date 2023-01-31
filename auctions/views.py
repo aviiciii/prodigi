@@ -349,8 +349,12 @@ def category_type(request,cat):
 
 
 def color(request, color):
+    listings = Listing.objects.filter(color=color, active_status= True).all()
     
+    context={
+        'listings':listings,
+        'color': color
+    }
 
-
-    return render(request, "auctions/color.html")
+    return render(request, "auctions/color.html", context)
 
