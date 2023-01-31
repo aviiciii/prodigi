@@ -36,6 +36,8 @@ class Listing(models.Model):
     start_bid = models.IntegerField()
     active_status = models.BooleanField(default=True)
     winner = models.ForeignKey(User, on_delete=models.SET_NULL, blank=True, null=True, related_name="bids_won")
+    color_id = models.IntegerField(blank=True, null=True)
+
 
     def __str__(self):
         return f'{self.title}'
@@ -66,7 +68,7 @@ class Watchlist(models.Model):
     id = models.AutoField(primary_key=True)
     list_id = models.ForeignKey(Listing, on_delete=models.CASCADE, related_name="watchlisted")
     user_id = models.ForeignKey(User, on_delete=models.CASCADE, related_name="watchlist")
-    
+
     def __str__(self):
         return f'{self.user_id}: {self.list_id}'
 
@@ -80,9 +82,4 @@ class Order(models.Model):
     
     def __str__(self):
         return f'{self.user_id}: {self.list_id}'
-
-
-
-
-
 

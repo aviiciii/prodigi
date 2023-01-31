@@ -13,5 +13,5 @@ urlpatterns = [
     path("watchlist", views.watchlist, name="watchlist"),
     path("category", views.category, name="category"),
     path("category/<str:cat>", views.category_type, name="category_type"),
-    
+    path("color/<int:color>", views.color, name="color"),
 ]

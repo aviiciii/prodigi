@@ -347,3 +347,10 @@ def category_type(request,cat):
     }
     return render(request, "auctions/category_listing.html", context)
 
+
+def color(request, color):
+    
+
+
+    return render(request, "auctions/color.html")
+
