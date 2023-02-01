@@ -237,10 +237,21 @@ p{
 }
 .total{
     float: left;
-    width: 100%;
+    width: 1000px;
     display: flex;
 }
 .checkout{
     margin-top: 20px;
     margin-bottom: 20px;
+}
+.order{
+    width: 900px;
+    display: flex;
+    padding: 10px;
+}
+.individual{
+    width:300px;
+    font-size: 20px;
+    padding: 10px;
+    background-color: aliceblue;
 }
