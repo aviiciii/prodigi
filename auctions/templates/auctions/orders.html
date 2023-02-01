@@ -1,0 +1,44 @@
+{% extends "auctions/layout.html" %}
+
+{% load static %}
+
+{% block body %}
+
+<div class="orders" style="width:100%;">
+
+    <h1>Your Orders</h1>
+
+    <div class="order_wrapper">
+
+        <div class="order">
+
+            <div class="individual">Name</div>
+
+            <div class="individual">Amount</div>
+
+            <div class="individual">Status</div>
+
+        </div>
+
+        {% for order in orders %}
+
+        
+
+
+            {% for listing in order.list_id.all %}
+            <div class="order">
+                <div class="individual">{{ listing.title }}</div>
+                <div class="individual">{{ listing.start_bid }}</div>
+                <div class="individual">{{ order.status }}</div>
+             </div>
+
+            {% endfor %}
+
+            
+
+            
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

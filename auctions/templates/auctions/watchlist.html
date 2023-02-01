@@ -37,10 +37,10 @@
                 </ul>
             </a>
     {% endfor %}
-    <form action="{% url 'index' %}">
+    <form action="{% url 'watchlist' %}" method="post">
         {% csrf_token %}
         <div class="checkout">
-            <input type="submit" class="btn btn-primary"></input>
+            <input type="submit" value="Checkout" class="btn btn-primary"></input>
         </div>
     </form>
     
