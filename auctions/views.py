@@ -358,6 +358,8 @@ def color(request, color):
 
     return render(request, "auctions/color.html", context)
 
+
+@login_required(login_url=LOGIN_REDIRECT_URL)
 def orders(request):
     username = request.user.get_username()
     user = User.objects.get(username=username) 
