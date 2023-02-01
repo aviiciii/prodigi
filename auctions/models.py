@@ -83,6 +83,11 @@ class Order(models.Model):
 
 
 
-
-
+class Loyality(models.Model):
+    id = models.AutoField(primary_key=True)
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE, related_name="loyality")
+    points = models.IntegerField(default=0)
+    
+    def __str__(self):
+        return f'{self.user_id}: {self.points}'
 
