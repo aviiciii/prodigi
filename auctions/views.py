@@ -296,13 +296,14 @@ def watchlist(request):
         
         print(listings)
 
-        # neworder= Order.objects.create(
-        #     user_id=user,
-        #     amount= sum(listing.list_id.start_bid for listing in listings),
-        #     status= 'Pending'
-        # )
-        # for listing in listings:
-        #     neworder.list_id.add(listing)
+        neworder= Order.objects.create(
+            user_id=user,
+            amount= sum(listing.list_id.start_bid for listing in listings),
+            status= 'Pending'
+        )
+        for listing in listings:
+            print(listing.list_id)
+            neworder.list_id.add(listing.list_id)
 
         print('order created')
         
