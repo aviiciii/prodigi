@@ -9,7 +9,14 @@
 
 <div class="container">
 
-    <h1>Products</h1>
+    <div style="width: 100%; display: flex; justify-content: space-between;">
+        <h1>Products</h1>
+        <div style="background-color:#B2BEB5; border-radius:30px; padding:10px; height: max-content; display: flex; align-items: center;">
+            <img style="width: 35px;" src="{% static 'auctions/coin.png' %}" alt=""> 
+            &nbsp
+            <label style="color:white; font-size: 20px;">Loyalty Points: {}</label>
+        </div>
+    </div>
 
     <div class="dummy">
 
@@ -22,7 +29,6 @@
             <a href="{% url 'color' 4 %}"><button id="btn4" style="border:none; width:50px; height:30px; background-color: #FFDBAC;">&nbsp</button></a>
         </form>
 
-        <div class="loyalty" style="width:150px; height:100px; background-color: aliceblue; text-align:center;"></div>
 
     </div>
 
